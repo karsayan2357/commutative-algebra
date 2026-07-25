@@ -1,12 +1,12 @@
 \chapter{Lecture Notes}
 
-\section{Lecture 1 \small (23/7)}
+\section{Lecture 1}
 
 \begin{convention}
 Rings are commutative with $1$.
 \end{convention}
 
-\begin{definition}
+\begin{definition}{}{def:ring-morphism}
 Let $R, S$ be rings. A \emph{morphism} $\varphi$ from $R$ to $S$ is a map $\varphi: R \to S$ such that
 \begin{enumerate}[label=(\arabic*)]
     \item $\varphi(r + s) = \varphi(r) + \varphi(s)$,
@@ -25,7 +25,7 @@ What is $R[X]$?
 
 $X$ is not an element of $R$. Consider
 \[
-S = \left\{ f : \mathbb{N} \to R \ \middle|\ f(r) = 0 \text{ for all but finitely many } r \right\},
+S = \left\{ f : \bbn \to R \ \middle|\ f(r) = 0 \text{ for all but finitely many } r \right\},
 \]
 with the usual addition and multiplication in sequences (Cauchy product). Then $S$ is a ring with identity
 \[
@@ -39,7 +39,7 @@ Define $X = (0, 1, 0, \ldots)$ and observe $X^2 = (0, 0, 1, 0, \ldots)$. A polyn
 P = (P_0, P_1, \ldots, P_n, 0, \ldots) = \varphi(P_0) \cdot 1_S + \varphi(P_1) \cdot X + \cdots + \varphi(P_n) \cdot X^n.
 \]
 
-\begin{definition}
+\begin{definition}{}{def:prime-element}
 Let $R$ be a ring. A non-zero, non-unit element $p \in R$ is \emph{prime} if
 \[
 p \mid ab \implies p \mid a \text{ or } p \mid b
@@ -47,38 +47,38 @@ p \mid ab \implies p \mid a \text{ or } p \mid b
 (include the elementwise definition: for $a, b \in R$, $a \mid b$ if $\exists\, r \in R$ such that $b = r \cdot a$).
 \end{definition}
 
-\begin{definition}
+\begin{definition}{}{def:prime-ideal}
 Let $R$ be a ring. A proper ideal $P$ of $R$ is called a \emph{prime ideal} if
 \[
 ab \in P \implies a \in P \text{ or } b \in P.
 \]
 \end{definition}
 
-\begin{definition}
+\begin{definition}{}{def:ideal}
 Let $R$ be a ring. $I \subseteq R$ is called an \emph{ideal} if there exists a ring $S$ and a morphism $\varphi: R \to S$ such that $I = \ker(\varphi)$.
 \end{definition}
 
-\begin{remark}
+\begin{remark}{}{rem:ideal-elementwise}
 This immediately gives the elementwise definition of ideals.
 \end{remark}
 
 \[
-\mathcal{N}(R) = \{\text{all nilpotent elements of } R\} \quad \leadsto \quad \text{the \emph{nil-radical} of } R.
+\caln(R) = \{\text{all nilpotent elements of } R\} \quad \leadsto \quad \text{the \emph{nil-radical} of } R.
 \]
 
-\begin{theorem}
+\begin{theorem}{}{thm:nilradical}
 \[
-\mathcal{N}(R) = \bigcap_{P \in \operatorname{Spec} R} P, \qquad \text{where } \operatorname{Spec} R = \text{all prime ideals of } R.
+\caln(R) = \bigcap_{P \in \Spec R} P, \qquad \text{where } \Spec R = \text{all prime ideals of } R.
 \]
 \end{theorem}
 
 \begin{proof}
-Let $x \in \mathcal{N}(R)$. Then for any $P \in \operatorname{Spec} R$, there exists $n_P \in \mathbb{N}$ such that
+Let $x \in \caln(R)$. Then for any $P \in \Spec R$, there exists $n_P \in \bbn$ such that
 \[
 x^{n_P} = 0 \implies 0 \in P \implies x^{n_P} \in P \implies x \in P.
 \]
 
-Now let $x \notin \mathcal{N}(R)$, and define
+Now let $x \notin \caln(R)$, and define
 \[
 S = \{ I \subseteq R \text{ ideal} \mid x^n \notin I \text{ for all } n \}.
 \]
@@ -88,14 +88,14 @@ $S \neq \emptyset$, as $\langle 0 \rangle \in S$, and $S$ is a poset (ordered by
 
 \emph{Proof of claim.} Let $a \notin M$, $b \notin M$. Now,
 \[
-M + \langle a \rangle, \ M + \langle b \rangle \notin S \implies \exists\, m, n \in \mathbb{N} \text{ such that}
+M + \langle a \rangle, \ M + \langle b \rangle \notin S \implies \exists\, m, n \in \bbn \text{ such that}
 \]
 \[
 x^m \in M + \langle a \rangle \text{ and } x^n \in M + \langle b \rangle \implies x^{m+n} \in M + \langle ab \rangle.
 \]
 If $ab \in M$, then $x^{m+n} \in M$, a contradiction. Hence $ab \notin M$, so $M$ is prime. $\hfill\square$
 
-Since $x \notin M$ and $M \in \operatorname{Spec} R$, we conclude $x \notin \bigcap_{P \in \operatorname{Spec} R} P$, completing the proof.
+Since $x \notin M$ and $M \in \Spec R$, we conclude $x \notin \bigcap_{P \in \Spec R} P$, completing the proof.
 \end{proof}
 
 \begin{question}
@@ -104,12 +104,12 @@ What are the units of $R[X]$?
 
 If $R$ is an integral domain, then they are precisely the units of $R$.
 
-\begin{proposition}
+\begin{proposition}{}{prop:units-poly}
 $f(X) = a_n X^n + \cdots + a_1 X + a_0$ is a unit if $a_0$ is a unit and the $a_i$'s are nilpotent.
 \end{proposition}
 
 \begin{proof}
-Let $P \in \operatorname{Spec} R$. We have a natural morphism $\varphi: R[X] \to (R/P)[X]$ given by
+Let $P \in \Spec R$. We have a natural morphism $\varphi: R[X] \to (R/P)[X]$ given by
 \[
 \varphi(b_m X^m + \cdots + b_1 X + b_0) = \overline{b_m} X^m + \cdots + \overline{b_1} X + \overline{b_0}, \qquad (\overline{b_i} = b_i \bmod P).
 \]
@@ -117,9 +117,9 @@ Then $\varphi(f)$ is a unit in $(R/P)[X]$, and since $R/P$ is an integral domain
 \[
 \overline{a_i} \equiv \overline{0} \pmod{P} \text{ for all } i \in [n], \qquad \text{and} \qquad \overline{a_0} \text{ is a unit of } R/P.
 \]
-That is, $a_0 \notin P$ and $a_1, \ldots, a_n \in P$. As $P \in \operatorname{Spec} R$ was arbitrary,
+That is, $a_0 \notin P$ and $a_1, \ldots, a_n \in P$. As $P \in \Spec R$ was arbitrary,
 \[
-a_0 \notin P \text{ and } a_i \in P \ \ \forall\, i \in [n], \qquad \text{for all } P \in \operatorname{Spec} R.
+a_0 \notin P \text{ and } a_i \in P \ \ \forall\, i \in [n], \qquad \text{for all } P \in \Spec R.
 \]
 
 The other direction is trivial.
@@ -127,7 +127,7 @@ The other direction is trivial.
 
 \section{Lecture 2}
 
-\begin{definition}
+\begin{definition}{}{def:module}
 Let $R$ be a ring and let $(M, +)$ be an abelian group. A \emph{scalar multiplication}
 \[
 R \times M \longrightarrow M, \qquad (r, m) \longmapsto rm,
@@ -141,7 +141,7 @@ makes $M$ into an \emph{$R$-module} if the following hold for all $r, s \in R$ a
 \end{enumerate}
 \end{definition}
 
-\begin{definition}
+\begin{definition}{}{def:module-morphism}
 If $M, N$ are $R$-modules, a map $\varphi: M \to N$ is called an \emph{$R$-module morphism} if
 \begin{enumerate}[label=(\roman*)]
     \item $\varphi(m_1 + m_2) = \varphi(m_1) + \varphi(m_2)$,
@@ -149,7 +149,7 @@ If $M, N$ are $R$-modules, a map $\varphi: M \to N$ is called an \emph{$R$-modul
 \end{enumerate}
 \end{definition}
 
-\begin{definition}
+\begin{definition}{}{def:free-module}
 Let $R$ be a ring and $S$ a nonempty set. A \emph{free $R$-module on $S$} is a pair $(F, f)$, where $F$ is an $R$-module and $f: S \to F$ is a set-theoretic map, such that: for any $R$-module $M$ and any set-theoretic map $g: S \to M$, there exists a unique $R$-module morphism $h: F \to M$ such that
 \[
 \begin{tikzcd}
@@ -160,11 +160,11 @@ F \arrow[ur, dashed, "h"'] &
 commutes, i.e.\ $h \circ f = g$.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition}{}{prop:free-module-properties}
 Let $(F, f)$ be a free $R$-module on $S$. Then:
 \begin{enumerate}[label=(\arabic*)]
     \item $f$ is injective;
-    \item $\operatorname{Im}(f)$ generates $F$ as an $R$-module.
+    \item $\Im(f)$ generates $F$ as an $R$-module.
 \end{enumerate}
 \end{proposition}
 
@@ -177,7 +177,7 @@ Take any $R$-module $M$ with at least two elements, and define $g: S \to M$ such
 \]
 \end{proof}
 
-\begin{definition}
+\begin{definition}{}{def:submodule-generated}
 Let $M$ be an $R$-module and $\emptyset \neq A \subseteq M$. The \emph{submodule of $M$ generated by $A$} is, equivalently:
 \begin{enumerate}[label=(\arabic*)]
     \item the smallest submodule of $M$ containing $A$;
@@ -187,7 +187,7 @@ Let $M$ be an $R$-module and $\emptyset \neq A \subseteq M$. The \emph{submodule
 \end{definition}
 
 \begin{proof}[Proof of (2)]
-Let $A$ be the submodule of $F$ generated by $\operatorname{Im}(f)$. Since $f(s) \in \operatorname{Im}(f) \subseteq A$ for every $s \in S$, $f$ factors as $f = i_A \circ f^*$ for a set-theoretic map $f^*: S \to A$ and the inclusion $i_A: A \hookrightarrow F$:
+Let $A$ be the submodule of $F$ generated by $\Im(f)$. Since $f(s) \in \Im(f) \subseteq A$ for every $s \in S$, $f$ factors as $f = i_A \circ f^*$ for a set-theoretic map $f^*: S \to A$ and the inclusion $i_A: A \hookrightarrow F$:
 \[
 \begin{tikzcd}
 S \arrow[r, "f^*"] \arrow[dr, "f"'] & A \arrow[d, hook, "i_A"] \\
@@ -207,10 +207,10 @@ It is enough to show $i_A$ is onto. We compute
 \[
 (i_A \circ h) \circ f = i_A \circ (h \circ f) = i_A \circ f^* = f.
 \]
-So $i_A \circ h$ and $\mathrm{id}_F$ both satisfy $(-) \circ f = f$; by uniqueness in the definition of freeness (applied with $M = F$, $g = f$), $i_A \circ h = \mathrm{id}_F$. Hence $i_A$ is onto, i.e.\ $A = F$, so $\operatorname{Im}(f)$ generates $F$.
+So $i_A \circ h$ and $\mathrm{id}_F$ both satisfy $(-) \circ f = f$; by uniqueness in the definition of freeness (applied with $M = F$, $g = f$), $i_A \circ h = \mathrm{id}_F$. Hence $i_A$ is onto, i.e.\ $A = F$, so $\Im(f)$ generates $F$.
 \end{proof}
 
-\begin{theorem}[Uniqueness of free modules]
+\begin{theorem}{Uniqueness of free modules}{thm:free-uniqueness}
 Let $(F, f)$ be a free $R$-module on a set $S$. Then $(F', f')$ is also a free $R$-module on $S$ if and only if there exists a unique $R$-module isomorphism $j: F \to F'$ such that $j \circ f = f'$.
 \end{theorem}
 
@@ -253,7 +253,7 @@ F' \arrow[r, "j^{-1}"'] & F \arrow[u, "h"']
 \textbf{Uniqueness.} Suppose $t: F' \to M$ also satisfies $t \circ f' = g$. Then $t \circ j: F \to M$ satisfies $(t \circ j) \circ f = t \circ (j \circ f) = t \circ f' = g$, so by uniqueness of $h$ (from freeness of $(F,f)$), $t \circ j = h$, hence $t = h \circ j^{-1} = h'$.
 \end{proof}
 
-\begin{theorem}[Existence of free $R$-modules]
+\begin{theorem}{Existence of free $R$-modules}{thm:free-existence}
 For any ring $R$ and nonempty set $S$, a free $R$-module on $S$ exists.
 \end{theorem}
 

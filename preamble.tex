@@ -1,13 +1,63 @@
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsthm, amssymb, amsmath}
+\usepackage{fancyhdr}
+\usepackage{abstract}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{lastpage}
+\usepackage{titling}
+\usepackage{bm}
+\usepackage{dsfont}
 \usepackage{enumitem}
-\usepackage[
-    colorlinks = true,
-    linkcolor = blue
-]{hyperref}
-\usepackage{kpfonts, eulervm}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{bbm}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems,skins,hooks,breakable}
+\usepackage{titlesec}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{palatino, mathpazo}
+% \usepackage{kpfonts}
+% \usepackage{euler}
 \usepackage{tikz}
 \usepackage{tikz-cd}
+\usepackage{graphicx}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt}
+\pagenumbering{roman}
+
+\definecolor{linkblue}{RGB}{0,70,140}
+\definecolor{urlblue}{RGB}{90,0,160}
+\definecolor{citegreen}{RGB}{0,110,90}
+\usepackage[
+    colorlinks = true,
+    linkcolor  = linkblue,
+    citecolor  = citegreen,
+    urlcolor   = urlblue
+]{hyperref}
+
+%%%%% HEADERS/FOOTERS %%%%%
+
+\setlength{\headheight}{16pt}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{{\color{main}\hrule height\headrulewidth width\headwidth}}
+\renewcommand{\headruleskip}{3pt}
+\fancyhead[LE]{\small\scshape\thechapter\enspace\leftmark}
+\fancyhead[RO]{\small\scshape\rightmark}
+\fancyhead[RE,LO]{\small\thepage}
+\pagestyle{fancy}
+
+%%%%% CHAPTER TITLE STYLE %%%%%
+
+\titleformat{\chapter}[display]
+    {\normalfont\scshape\bfseries}
+    {\Large\chaptertitlename\ \thechapter}{0pt}{\huge}[\vspace{0.5ex}{\color{main}\hrule height 1pt}]
+
+\titlespacing*{\chapter}
+    {0pt}     % left margin
+    {50pt}    % space before
+    {40pt}    % space after
+
+\setcounter{tocdepth}{2}
