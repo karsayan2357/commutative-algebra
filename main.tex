@@ -1,4 +1,4 @@
-\documentclass[11pt]{report}
+\documentclass[11pt]{book}
 
 \input{preamble}
 \input{macros}
@@ -9,8 +9,55 @@
 
 \begin{document}
 
+\pagenumbering{arabic}
 
-\include{titlepage}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+
+\vspace*{2.2cm}
+
+{\small\scshape\color{maingrey} Notes on}
+
+\vspace{0.9cm}
+
+\begin{tikzpicture}
+    \draw[main, line width=0.9pt] (-2.4,0) -- (-0.22,0);
+    \filldraw[main] (0,0.16) -- (0.16,0) -- (0,-0.16) -- (-0.16,0) -- cycle;
+    \draw[main, line width=0.9pt] (0.22,0) -- (2.4,0);
+\end{tikzpicture}
+
+\vspace{0.9cm}
+
+{\fontsize{46}{54}\selectfont\bfseries\scshape
+Commutative\\[0.15em]
+Algebra\par}
+
+\vspace{1cm}
+
+\begin{tikzpicture}
+    \draw[main, line width=0.9pt] (-2.4,0) -- (-0.22,0);
+    \filldraw[main] (0,0.16) -- (0.16,0) -- (0,-0.16) -- (-0.16,0) -- cycle;
+    \draw[main, line width=0.9pt] (0.22,0) -- (2.4,0);
+\end{tikzpicture}
+
+\vspace{1.1cm}
+
+{\large\itshape Lecture Notes \& Problem Discussions\par}
+
+\vfill
+
+{\Large\scshape Sayan Kar\par}
+
+\vspace{0.9cm}
+
+{\small\itshape Last updated\par}
+\vspace{2pt}
+{\large \today\par}
+
+\vspace*{1.8cm}
+\end{center}
+\end{titlepage}
 
 \begin{abstract}
 These are lecture notes for a first course in Commutative Algebra, covering rings, ideals, and modules, together with the accompanying problem-set discussions worked out alongside the lectures. The standard references for this material are \cite{AtiyahMacdonald}, \cite{Blyth1990}, and \cite{DummitFoote2004}.
@@ -18,13 +65,11 @@ These are lecture notes for a first course in Commutative Algebra, covering ring
 
 \tableofcontents
 
-
-\include{chapters/lec}
-\include{chapters/prob}
+\include{chapters/lecture-notes}
+\include{chapters/problem-discussions}
 % \include{chapters/chapter3}
 
-\include{ref}
-\bibliographystyle{alpha}
-\bibliography{ref}
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}

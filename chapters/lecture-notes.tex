@@ -407,3 +407,133 @@ X^n + a_{n-1}X^{n-1} + \cdots + a_0
 \]
 over $R$ (i.e.\ with $a_0, \ldots, a_{n-1} \in R$).
 \end{definition}
+
+\section{Lecture 4}
+
+\begin{definition}{}{def:subring-adjoin}
+Let $R$ be a subring of $S$, and let $U \subseteq S$ be a subset. Define
+\[
+R[U] := \text{the smallest subring of } S \text{ containing } R \text{ and } U.
+\]
+\end{definition}
+
+\begin{remark}{}{rem:adjoin-properties}
+For $U, V \subseteq S$,
+\[
+R[U][V] = R[U \cup V] = R[V][U].
+\]
+In particular, if $V = \{u_1, \ldots, u_n\}$, then
+\[
+R[u_1, \ldots, u_n] = R[u_1][u_2] \cdots [u_n].
+\]
+\end{remark}
+
+\begin{proposition}{}{prop:Ru-explicit}
+\[
+R[u] = \left\{ a_0 + a_1 u + \cdots + a_n u^n \ \middle|\ a_i \in R,\ n \in \bbn_{\geq 0} \right\}.
+\]
+\end{proposition}
+
+\begin{proof}
+Let $T = \{ a_0 + a_1 u + \cdots + a_n u^n \mid a_i \in R,\ n \in \bbn_{\geq 0} \}$.
+
+\textbf{$T$ is a subring of $S$.} It contains $1$ (take $n=0$, $a_0=1$). It is closed under addition: given two such expressions, pad the shorter one with zero coefficients to a common degree and add coefficientwise, which stays in $R$ since $R$ is a ring. It is closed under multiplication: expanding a product of two such expressions and collecting powers of $u$, each resulting coefficient is a finite sum of products of elements of $R$, hence lies in $R$.
+
+\textbf{$R[u] \subseteq T$.} Since $R \subseteq T$ (take $n=0$) and $u \in T$ (take $n=1$, $a_0=0, a_1=1$), and $T$ is a subring of $S$ containing $R$ and $u$, while $R[u]$ is by definition the \emph{smallest} such subring, we get $R[u] \subseteq T$.
+
+\textbf{$T \subseteq R[u]$.} Since $R[u]$ is a subring containing $R$ and $u$, it is closed under addition and multiplication. So for any $a_0, \ldots, a_n \in R \subseteq R[u]$, each $a_i u^i \in R[u]$, and hence $a_0 + a_1 u + \cdots + a_n u^n \in R[u]$.
+
+Combining both containments, $R[u] = T$.
+\end{proof}
+
+\begin{example}{}{ex:Zi-quotient-poly}
+The map $\bbz[X] \to \bbz[i]$, $X \mapsto i$, is a surjective ring morphism with kernel $\langle X^2+1 \rangle$.
+\end{example}
+
+\begin{proposition}{}{prop:poly-universal-extension}
+Let $R, S$ be rings and $\varphi: R \to S$ be a morphism. Let $\alpha \in S$ be an element. Then $\varphi$ can be uniquely extended to a morphism $\widetilde\varphi: R[X] \to S$ such that $\widetilde\varphi|_R = \varphi$ and $\widetilde\varphi(X) = \alpha$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Define $\widetilde\varphi: R[X] \to S$ by
+\[
+\widetilde\varphi(a_0 + a_1 X + \cdots + a_n X^n) = \varphi(a_0) + \varphi(a_1)\alpha + \cdots + \varphi(a_n)\alpha^n,
+\]
+and $\widetilde\varphi(A \cdot B) = \widetilde\varphi(A) \cdot \widetilde\varphi(B)$.
+\end{proof}
+
+Let $R$ be a subring of $S$, and let $u \in S$. Then there is a unique morphism $\varphi: R[X] \to S$ such that $\varphi|_R = \mathrm{id}_R$ and $\varphi(X) = u$ (apply the above with $\varphi = \mathrm{id}_R$, $\alpha = u$). Then $\Im(\varphi) = R[u]$; letting $I = \ker \varphi$,
+\[
+R[X]/I \cong R[u].
+\]
+
+\begin{notation}
+$I \cap R = \langle 0 \rangle$.
+\end{notation}
+
+Conversely, let $I$ be an ideal of $R[X]$ such that $I \cap R = \langle 0 \rangle$. We have the natural projection map
+\[
+R[X] \longrightarrow R[X]/I.
+\]
+Since $I \cap R = 0$, $R \hookrightarrow R[X]/I$, so we can identify $a \in R$ with its image $a + I$.
+
+\begin{question}
+What is the image of $R[X]$ in $R[X]/I$? (It will be determined by $\Im(R)$ and that of $X$.)
+\end{question}
+
+Under the projection, $X \mapsto X+I$. Writing $u = X+I$,
+\[
+R[X]/I \cong R[u].
+\]
+
+\begin{definition}{}{def:integral-extension}
+Let $R \hookrightarrow S$. $S$ is said to be an \emph{integral extension} of $R$ if each $\alpha \in S$ is integral over $R$.
+\end{definition}
+
+\begin{notation}
+(Recall.) Let $R$ be a commutative ring with $1$, and let $A \in M_n(R)$. Then
+\[
+A \cdot \operatorname{adj}(A) = \operatorname{adj}(A) \cdot A = \det(A) \cdot I_n.
+\]
+\end{notation}
+
+\begin{theorem}{}{thm:integral-fg-module}
+Let $R \hookrightarrow S$ and $b \in S$. Then
+\[
+b \text{ is integral over } R \iff R[b] \text{ is a finitely generated } R\text{-module}.
+\]
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$) Assume $b$ is integral over $R$; then there is a monic polynomial $f(X) \in R[X]$ such that $f(b) = 0$. Let $\deg f = n \geq 1$. Take any $g(b) \in R[b]$. By the division algorithm,
+\[
+g(X) = q(X) f(X) + r(X), \qquad \deg r < n,
+\]
+so $g(b) = r(b)$. Hence $R[b]$ is generated (as an $R$-module) by $\{1, b, \ldots, b^{n-1}\}$.
+
+($\Leftarrow$) Conversely, let $R[b]$ be a finitely generated $R$-module, say $R[b] = \langle w_1, \ldots, w_n \rangle$. Then for each $i \in [n]$,
+\[
+b w_i = a_{i1} w_1 + \cdots + a_{in} w_n, \qquad a_{ij} \in R,
+\]
+i.e.\ $(bI - A)\vec{w} = 0$, where $A = (a_{ij})$. Multiplying by $\operatorname{adj}(bI-A)$,
+\[
+\det(bI-A)\, w_i = 0 \qquad \forall\, i \in [n].
+\]
+Since $1 \in R[b] = \langle w_1, \ldots, w_n \rangle$, we get $\det(bI-A) = 0$, which is a monic equation in $b$ (of degree $n$). Hence $b$ is integral over $R$.
+\end{proof}
+
+\begin{theorem}{}{thm:integral-fg-module-finite-set}
+Let $R \hookrightarrow S$, and let $b_1, b_2, \ldots, b_n \in S$. Then each $b_i$ is integral over $R$ if and only if $R[b_1, \ldots, b_n]$ is a finitely generated $R$-module.
+\end{theorem}
+
+\begin{proof}
+Induct on $n$. The case $n=1$ is the previous theorem.
+
+For $n > 1$: assume $b_1, \ldots, b_n$ are integral over $R$. In particular $b_n$ is integral over $R$, hence also integral over $R[b_1, \ldots, b_{n-1}]$; by the previous theorem (applied over the base ring $R[b_1,\ldots,b_{n-1}]$), $R[b_1, \ldots, b_{n-1}][b_n]$ is a finitely generated $R[b_1,\ldots,b_{n-1}]$-module, which (combined with the induction hypothesis that $R[b_1,\ldots,b_{n-1}]$ is a finitely generated $R$-module) makes $R[b_1,\ldots,b_n]$ a finitely generated $R$-module.
+
+The converse is the same as the $n=1$ case.
+\end{proof}
+
+\begin{exercise}{}{exer:integral-sum-product}
+Let $R \hookrightarrow S$, and let $a, b \in S$ be integral over $R$. Then $a \pm b$ and $ab$ are integral over $R$.
+\end{exercise}

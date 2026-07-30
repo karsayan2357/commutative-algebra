@@ -1,7 +1,6 @@
 \usepackage[margin=0.9in]{geometry}
 \usepackage{amsthm, amssymb, amsmath}
 \usepackage{fancyhdr}
-\usepackage{abstract}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
 \usepackage{lastpage}
@@ -19,13 +18,9 @@
 \usepackage{setspace}
 \onehalfspacing
 \usepackage{palatino, mathpazo}
-% \usepackage{kpfonts}
-% \usepackage{euler}
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{graphicx}
-
-\pagenumbering{roman}
 
 \definecolor{linkblue}{RGB}{0,70,140}
 \definecolor{urlblue}{RGB}{90,0,160}
@@ -61,3 +56,21 @@
     {40pt}    % space after
 
 \setcounter{tocdepth}{2}
+
+%%%%% ABSTRACT %%%%%
+
+\newenvironment{abstract}{
+    \clearpage
+    \thispagestyle{empty}
+    \null\vfill
+    \begin{center}
+        {\bfseries\Large\scshape Abstract}\\[0.35cm]
+        {\color{main}\rule{0.15\textwidth}{0.8pt}}
+    \end{center}
+    \vspace{0.6cm}
+    \begin{quote}
+    \normalsize
+}{
+    \end{quote}
+    \vfill\null
+}
