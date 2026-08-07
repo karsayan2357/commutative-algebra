@@ -790,8 +790,6 @@ Conversely, let $m/s \in \Ker(S^{-1}\psi)$. Then $\psi(m)/s = 0$, so there is $t
 \frac ms = \frac{mt}{st} = \frac{\varphi(m')}{st} = (S^{-1}\varphi)\!\left(\frac{m'}{st}\right) \in \Im(S^{-1}\varphi).
 \]
 Hence $\Ker(S^{-1}\psi) \subseteq \Im(S^{-1}\varphi)$, giving equality.
-<<<<<<< HEAD:chapters/lecture-notes.tex
-=======
 \end{proof}
 
 \section{Lecture 6}
@@ -971,5 +969,144 @@ so
 \[
 x^{-1} = -\bigl(a_1 + a_2 x + \cdots + a_m x^{m-1}\bigr) \in R.
 \]
->>>>>>> 44ffcf9 (lecture 6 added):chapters/lec.tex
+\end{proof}
+
+\section{Lecture 7}
+
+\begin{example}{}{ex:k-t2-t3-not-integrally-closed}
+Let $k$ be a field, $t$ an indeterminate, and $A = k[t^2,t^3] \subseteq B = k[t]$. Since $A$ is a subring of the integral domain $B$, $A$ is an integral domain. The fraction field of both $A$ and $B$ is $k(t)$, and since $B$ is a UFD, $B$ is integrally closed in $k(t)$.
+\end{example}
+
+\begin{question}
+Is $A$ integrally closed in $k(t)$?
+\end{question}
+
+No: $t$ is integral over $A$, being a root of $X^2 - t^2 \in A[X]$, but $t \notin A$. So $A$ is not integrally closed.
+
+\begin{question}
+What is the integral closure of $A$ in $k(t)$?
+\end{question}
+
+It is $B$, since $B$ is integrally closed in $k(t)$.
+
+\begin{example}{}{ex:Zi-integral-closure}
+Similarly,
+\[
+\begin{tikzcd}
+B \arrow[r, hook] & \bbq(i) \\
+\bbz \arrow[u, hook] \arrow[r, hook] & \bbq \arrow[u, hook]
+\end{tikzcd}
+\]
+where $B$ is the integral closure of $\bbz$ (an integrally closed domain) in $\bbq(i)$. One checks $B = \bbz[i]$: $\min(i,\bbq) = X^2+1 \in \bbz[X]$.
+\end{example}
+
+\begin{theorem}{}{thm:integral-iff-minpoly-in-A}
+Let $A$ be an integrally closed domain with $K = \bbq(A)$, and let $L$ be an algebraic extension of $K$. Then $\alpha \in L$ is integral over $A$ if and only if $\min(\alpha,K) \in A[X]$.
+\end{theorem}
+
+\begin{proof}
+($\Leftarrow$) is trivial: if $f(X) = X^n+a_1X^{n-1}+\cdots+a_n = \min(\alpha,K) \in A[X]$, then $f(\alpha)=0$ exhibits $\alpha$ as integral over $A$.
+
+($\Rightarrow$) Let $\alpha$ be integral over $A$; we show the coefficients $a_i$ of $f := \min(\alpha,K)$ lie in $A$.
+
+Let $\overline L$ be an algebraic closure of $L$. In $\overline L$, $f$ splits as
+\[
+f(X) = (X-\alpha_1)\cdots(X-\alpha_n),
+\]
+where the $\alpha_i$ are the conjugates of $\alpha$ over $K$. For each $i$ there is a $K$-isomorphism $K[\alpha] \cong K[\alpha_i]$ fixing $K$ and sending $\alpha \mapsto \alpha_i$.
+
+Since $\alpha$ is integral over $A$, there is a monic $g(X) \in A[X]$ with $g(\alpha)=0$; as $f = \min(\alpha,K)$, $f \mid g$ in $K[X]$. Applying the isomorphism above, $g(\alpha_i)=0$ for each $i$, so each $\alpha_i$ is integral over $A$.
+
+Now $a_1,\ldots,a_n \in A[\alpha_1,\ldots,\alpha_n]$ (they are, up to sign, the elementary symmetric functions of the $\alpha_i$ -- Newton's identities), and each $\alpha_i$ is integral over $A$, so each $a_i$ is integral over $A$. But $a_i \in K$ and $A$ is integrally closed in $K$, so $a_i \in A$ for all $i$.
+\end{proof}
+
+\begin{exercise}{}{exer:curve-coordinate-ring}
+\begin{enumerate}[label=(\arabic*)]
+    \item $k[X,Y]/\langle Y^2-X^3\rangle \cong k[t^2,t^3]$ (the coordinate ring of the curve $Y^2=X^3$).
+    \item Show directly that $k[t^2,t^3]$ is not a UFD.
+\end{enumerate}
+\end{exercise}
+
+\begin{example}{}{ex:A-sqrt-f-integrally-closed}
+Let $A$ be a UFD with $2 \in A^\times$, and let $f \in A$ be square-free. Then $A[\sqrt f]$ is an integrally closed domain.
+\end{example}
+
+\begin{proof}
+Since $\langle X^2-f\rangle \in \Spec(A[X])$ (as $f$ is square-free, $X^2-f$ is irreducible),
+\[
+A[\sqrt f] \cong A[X]/\langle X^2-f \rangle
+\]
+is an integral domain.
+
+Let $\alpha$ be a square root of $f$; we ask whether $A[\alpha]$ is integrally closed. Let $K := \bbq(A)$; since $A$ is a UFD, $A$ is integrally closed in $K$.
+
+\textbf{Case $\alpha \in K$:} Then $X^2-f \in A[X]$ has root $\alpha \in K$, so $\alpha$ is integral over $A$, hence $\alpha \in A$ (as $A$ is integrally closed in $K$). So $A[\alpha]=A$, trivially integrally closed.
+
+\textbf{Case $\alpha \notin K$:} Then
+\[
+\bbq(A[\alpha]) = K(\alpha) = K + K\alpha,
+\]
+and every $\theta \in K(\alpha)$ can be written uniquely as $\theta = x+y\alpha$ with $x,y \in K$; its minimal polynomial over $K$ is
+\[
+X^2 - 2xX + (x^2-fy^2).
+\]
+
+Suppose $\theta$ is integral over $A[\alpha]$. Since $\alpha$ is integral over $A$ (a root of $X^2-f\in A[X]$), $A[\alpha]$ is integral over $A$; by transitivity, $\theta$ is integral over $A$. By the previous theorem (as $A$ is integrally closed in $K$),
+\[
+X^2-2xX+(x^2-fy^2) \in A[X],
+\]
+i.e.\ $2x \in A$ and $x^2-fy^2 \in A$. Since $2$ is a unit, $x \in A$; hence $fy^2 = x^2-(x^2-fy^2) \in A$.
+
+If some prime $p \in A$ divides the denominator of $y$ (writing $y \in K$ in lowest terms), then since $fy^2 \in A$ and $f$ is square-free, we would need $p^2 \mid f$ -- a contradiction. Hence $y \in A$, so $\theta = x+y\alpha \in A[\alpha]$.
+
+Together with the trivial case $A[\alpha]=A$, this shows $A[\alpha]$ is integrally closed.
+\end{proof}
+
+\begin{lemma}{}{lem:integral-extension-maximal-ideals}
+Let $A \hookrightarrow B$ be an integral extension. If $P \in \Max(B)$, then $P \cap A \in \Max(A)$. Conversely, if $\mathfrak p \in \Max(A)$, then there exists $P \in \Spec(B)$ such that $P \cap A = \mathfrak p$ (and $P$ is maximal too).
+\end{lemma}
+
+\begin{proof}
+$P \cap A \in \Spec(A)$, and $A/(P\cap A) \hookrightarrow B/P$ is an integral extension. Since $B/P$ is a field, $A/(P\cap A)$ is a field, so $P \cap A \in \Max(A)$.
+
+Conversely, let $\mathfrak p \in \Max(A)$. It suffices to show $\mathfrak p B \neq B$: if $\mathfrak p B$ is a proper ideal, there is $P \in \Max(B)$ with $\mathfrak p B \subseteq P$, so $\mathfrak p \subseteq P \cap A$; since $1 \notin P \cap A$ and $\mathfrak p$ is maximal, $P \cap A = \mathfrak p$.
+
+Suppose instead $\mathfrak p B = B$. Then $1 = b_1p_1 + \cdots + b_np_n$ for some $b_i \in B$, $p_i \in \mathfrak p$. Let $C = A[b_1,\ldots,b_n]$; since each $b_i$ is integral over $A$, $C$ is a finitely generated $A$-module. From $1 = \sum b_ip_i$ (with $b_i \in C$, $p_i \in \mathfrak p$), $\mathfrak p C = C$.
+
+By Nakayama's Lemma, there is $a \in A$ with $a \equiv 1 \pmod{\mathfrak p}$ and $aC=0$; since $1 \in C$, $a = a\cdot 1 = 0$, so $0 \equiv 1 \pmod{\mathfrak p}$, i.e.\ $1 \in \mathfrak p$ -- a contradiction.
+\end{proof}
+
+\begin{theorem}{Lying Over}{thm:lying-over}
+Let $A \hookrightarrow B$ be an integral extension and $\mathfrak p \in \Spec(A)$.
+\begin{enumerate}[label=(\roman*)]
+    \item There exists $P \in \Spec(B)$ such that $P \cap A = \mathfrak p$ (we say $P$ \emph{lies over} $\mathfrak p$).
+    \item There is no inclusion between distinct prime ideals of $B$ lying over $\mathfrak p$: if $P \subseteq Q$ and $P \cap A = \mathfrak p = Q \cap A$, then $P=Q$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Localize at $S = A\setminus\mathfrak p$: we obtain $A_{\mathfrak p} \hookrightarrow B_{\mathfrak p} := S^{-1}B$, an integral extension (by the localization-integral-extension theorem below), with $A_{\mathfrak p}$ local with maximal ideal $\mathfrak pA_{\mathfrak p}$. By the previous lemma (applied to $A_{\mathfrak p} \hookrightarrow B_{\mathfrak p}$ and the maximal ideal $\mathfrak p A_{\mathfrak p}$), there is a maximal ideal $\mathfrak P$ of $B_{\mathfrak p}$ with $\mathfrak P \cap A_{\mathfrak p} = \mathfrak p A_{\mathfrak p}$.
+
+Let $P \subseteq B$ be the contraction of $\mathfrak P$ along $B \to B_{\mathfrak p}$. Then $P \cap A = \mathfrak p$, proving (i).
+
+Moreover, the primes of $B$ lying over $\mathfrak p$ are in bijective correspondence with the maximal ideals of $B_{\mathfrak p}$ lying over $\mathfrak p A_{\mathfrak p}$ (via this same contraction/extension correspondence). Since distinct maximal ideals are never comparable by inclusion, neither are the corresponding primes of $B$ lying over $\mathfrak p$, proving (ii).
+\end{proof}
+
+\begin{theorem}{}{thm:localization-integral-extension}
+Let $A \hookrightarrow B$ be an extension of rings and $C$ the integral closure of $A$ in $B$. If $S$ is a multiplicative subset of $A$, then $S^{-1}C$ is the integral closure of $S^{-1}A$ in $S^{-1}B$.
+\end{theorem}
+
+\begin{proof}
+Let $b/s \in S^{-1}B$ be integral over $S^{-1}A$:
+\[
+\left(\frac bs\right)^n + \frac{a_1}{s_1}\left(\frac bs\right)^{n-1} + \cdots + \frac{a_n}{s_n} = 0.
+\]
+Let $t = s_1\cdots s_n$. Multiplying through by $(st)^n$,
+\[
+(st)^n\left[\left(\frac bs\right)^n + \cdots\right] = 0
+\]
+becomes a monic equation in $bt$ with coefficients in $A$. Hence $bt$ is integral over $A$, i.e.\ $bt \in C$, so
+\[
+\frac bs = \frac{bt}{st} \in S^{-1}C.
+\]
 \end{proof}
