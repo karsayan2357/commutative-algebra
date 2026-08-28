@@ -1110,3 +1110,187 @@ becomes a monic equation in $bt$ with coefficients in $A$. Hence $bt$ is integra
 \frac bs = \frac{bt}{st} \in S^{-1}C.
 \]
 \end{proof}
+
+\section{Lecture 8}
+
+% Notes for this lecture to be added later.
+
+\section{Lecture 9}
+
+\begin{proposition}{}{prop:contraction-characterization}
+Let $\varphi: A \to B$ be a ring morphism and $\mathfrak p \in \Spec A$. Then $\mathfrak p$ is the contraction of some $Q \in \Spec B$ if and only if $\mathfrak p^{ec} = \mathfrak p$.
+\end{proposition}
+
+\begin{proof}
+In general, $\mathfrak p \subseteq \mathfrak p^{ec}$.
+
+($\Rightarrow$) If $\mathfrak p = Q^c$ for some $Q \in \Spec B$, then
+\[
+\mathfrak p^e = Q^{ce} \subseteq Q \quad\implies\quad \mathfrak p^{ec} \subseteq Q^c = \mathfrak p.
+\]
+
+($\Leftarrow$) Assume $\mathfrak p^{ec} = \mathfrak p$. Let $S = \varphi(A \setminus \mathfrak p)$, a multiplicative subset of $B$.
+
+\textbf{Note:} $\mathfrak p^e \cap S = \emptyset$. Indeed, if $x \in \mathfrak p^e \cap S$, then $\varphi^{-1}(x) \in A\setminus\mathfrak p$; but $x \in \mathfrak p^e$ gives $\varphi^{-1}(x) \in \mathfrak p^{ec} = \mathfrak p$ -- a contradiction.
+
+So $\mathfrak p^e S^{-1}B$ is a proper ideal of $S^{-1}B$, hence contained in some $\mathfrak m \in \Max(S^{-1}B)$. Let $Q$ be the contraction of $\mathfrak m$ in $B$; then $Q \in \Spec B$ and $\mathfrak p^e \subseteq Q$. Moreover $Q \cap S = \emptyset$, which gives $Q^c \subseteq \mathfrak p$.
+
+Now $\mathfrak p^{ec} \subseteq Q^c \subseteq \mathfrak p$, and since $\mathfrak p^{ec}=\mathfrak p$, we get $\mathfrak p = Q^c$.
+\end{proof}
+
+\begin{proposition}{}{prop:integral-closure-of-ideal}
+Let $A \hookrightarrow B$ be rings and $C$ the integral closure of $A$ in $B$. Let $I \subseteq A$ be an ideal. Then the integral closure of $I$ in $B$ is $\sqrt{IC} \subseteq C$.
+\end{proposition}
+
+\begin{proof}
+Suppose $x$ is integral over $I$ in $B$:
+\[
+x^n + a_1x^{n-1} + \cdots + a_n = 0, \qquad a_i \in I.
+\]
+Then $x \in C$ (a fortiori integral over $A$), and
+\[
+x^n = -(a_1x^{n-1}+\cdots+a_n) \in IC,
+\]
+so $x \in \sqrt{IC}$.
+
+Conversely, let $x \in \sqrt{IC}$, so $x^n \in IC$ for some $n>0$:
+\[
+x^n = a_1x_1 + \cdots + a_mx_m, \qquad a_i \in I,\ x_i \in C.
+\]
+Each $x_i \in C$ is integral over $A$, so $M := A[x_1,\ldots,x_m]$ is a finitely generated $A$-module, and $x^nM \subseteq IM$.
+
+Consider the endomorphism $\mu_{x^n}: M \to M$ given by multiplication by $x^n$; since $x^nM \subseteq IM$, the determinant-trick argument underlying Nakayama's Lemma (Lecture 6) yields a monic relation
+\[
+(x^n)^k + c_{k-1}(x^n)^{k-1} + \cdots + c_0 = 0, \qquad c_i \in I^i,
+\]
+as endomorphisms of $M$. Evaluating at $1 \in M$ (since $1 \in A \subseteq M$) gives this same relation as an identity in $B$, exhibiting $x$ as integral over $I$.
+\end{proof}
+
+\begin{proposition}{}{prop:integral-min-poly-radical}
+Let $A \hookrightarrow B$ be integral domains, $I \subseteq A$ an ideal, and suppose $A$ is integrally closed with $\bbq(A) = K$. Let $x \in B$ be integral over $I$. Then $x$ is algebraic over $K$, and if
+\[
+\min(x,K) = T^n + a_1T^{n-1} + \cdots + a_n,
+\]
+then $a_i \in \sqrt I$ for all $i$.
+\end{proposition}
+
+\begin{proof}
+Clearly $x$ is algebraic over $K$ (being integral over $A \subseteq K$). Let $L$ be an algebraic extension of $K$ containing the conjugates $x_1,\ldots,x_n$ of $x$.
+
+Each $x_i$ is integral over $I$ (as in the proof of the minimal-polynomial theorem from Lecture 7). Using the relations between roots and coefficients, $a_1,\ldots,a_n$ are all integral over $I$.
+
+Applying the previous proposition with $B$ replaced by $K$ (in which the integral closure of $A$ is $A$ itself, since $A$ is integrally closed), we get $a_i \in \sqrt I$ for all $i$.
+\end{proof}
+
+\begin{theorem}{Going Down}{thm:going-down}
+Assume:
+\begin{enumerate}[label=(\alph*)]
+    \item $A \hookrightarrow B$ is an integral extension;
+    \item $A, B$ are integral domains;
+    \item $A$ is integrally closed.
+\end{enumerate}
+Let $\mathfrak p_1 \supseteq \mathfrak p_2 \supseteq \cdots \supseteq \mathfrak p_n$ be a chain in $\Spec A$, and let $Q_1 \supseteq \cdots \supseteq Q_m$ ($m \leq n$) be a chain in $\Spec B$ with $Q_i \cap A = \mathfrak p_i$ for all $i \in [m]$. Then the chain can be extended:
+\[
+Q_1 \supseteq \cdots \supseteq Q_m \supseteq Q_{m+1} \supseteq \cdots \supseteq Q_n
+\]
+with $Q_i \in \Spec B$ and $Q_i \cap A = \mathfrak p_i$ for all $i \in [n]$.
+\end{theorem}
+
+\begin{proof}
+It suffices to treat $m=1$, $n=2$: we need $Q_2 \in \Spec B$ with $Q_1 \supseteq Q_2$ and $Q_2 \cap A = \mathfrak p_2$.
+
+The prime ideals of $B_{Q_1}$ are in bijective correspondence with the primes of $B$ contained in $Q_1$, via
+\[
+A \hookrightarrow B \hookrightarrow B_{Q_1}.
+\]
+It suffices to show $\mathfrak p_2 B_{Q_1} \cap A = \mathfrak p_2$. The containment $\mathfrak p_2 \subseteq \mathfrak p_2 B_{Q_1} \cap A$ is clear; we show the reverse.
+
+Let $x \in \mathfrak p_2 B_{Q_1} \cap A$, so $x = y/s$ with $y \in \mathfrak p_2 B$, $s \in B \setminus Q_1$. Write
+\[
+y = r_1 b_1 + \cdots + r_k b_k, \qquad r_i \in \mathfrak p_2,\ b_i \in B.
+\]
+Since $B$ is integral over $A$, each $b_i$ is integral over $A$, so $y$ is integral over $\mathfrak p_2$ (by the previous propositions).
+
+By the proposition on minimal polynomials (applied with $I=\mathfrak p_2$), $\min(y,K)$ (where $K = \bbq(A)$) has all coefficients in $\sqrt{\mathfrak p_2} = \mathfrak p_2$:
+\[
+y^r + u_1y^{r-1} + \cdots + u_r = 0, \qquad u_i \in \mathfrak p_2.
+\]
+
+Since $x = y/s \in A$, we have $s = yx^{-1}$ with $x^{-1} \in K$ (the case $x=0$ being trivial). Substituting $y=sx$ into the relation above and dividing by $x^r$,
+\[
+s^r + \frac{u_1}{x}s^{r-1} + \cdots + \frac{u_r}{x^r} = 0,
+\]
+a minimal equation for $s$ over $K$. Since $s \in B$ is integral over $A$, applying the proposition again (with $I=A$) gives $u_i/x^i \in \sqrt A = A$ for all $i$.
+
+Let $v_i := u_i/x^i \in A$, so $v_i x^i = u_i \in \mathfrak p_2$. FTSOC, suppose $x \notin \mathfrak p_2$. Since $\mathfrak p_2$ is prime, $x^i \notin \mathfrak p_2$, so $v_i \in \mathfrak p_2$ for all $i$. Then
+\[
+s^r = -\left(\frac{u_1}{x}s^{r-1} + \cdots + \frac{u_r}{x^r}\right) \in \mathfrak p_2 B \subseteq \mathfrak p_1 B \subseteq Q_1,
+\]
+so $s^r \in Q_1$; since $Q_1$ is prime, $s \in Q_1$ -- contradicting $s \in B\setminus Q_1$.
+
+Hence $x \in \mathfrak p_2$, completing the proof.
+\end{proof}
+
+\subsection*{Tensor Products of Modules}
+
+\begin{definition}{}{def:tensor-product-modules}
+Let $R$ be a commutative ring and $M,N,P$ be $R$-modules. A \emph{tensor product} of $M,N$ is a pair $(T,\theta)$, where $T$ is an $R$-module and $\theta: M\times N \to T$ is bilinear, such that for every bilinear map $f: M\times N \to P$, there is a unique linear map $h: T \to P$ with
+\[
+\begin{tikzcd}
+M\times N \arrow[r,"f"] \arrow[d,"\theta"'] & P \\
+T \arrow[ur,dashed,"h"'] &
+\end{tikzcd}
+\]
+i.e.\ $h\circ\theta=f$.
+\end{definition}
+
+\begin{exercise}{}{exer:tensor-product-uniqueness}
+The tensor product, if it exists, is unique up to isomorphism.
+\end{exercise}
+
+\begin{remark}{}{rem:tensor-image-generates}
+$\Im(\theta)$ generates $T$.
+\end{remark}
+
+\begin{proof}
+Let $T'$ be the submodule of $T$ generated by $\Im(\theta)$, with inclusion $i: T' \hookrightarrow T$. Since $\Im(\theta) \subseteq T'$, $\theta$ corestricts to a bilinear map $\theta': M\times N \to T'$. By the universal property of $(T,\theta)$ applied to the bilinear map $\theta'$ (viewed as landing in $T$ via $i\circ\theta'=\theta$), there is a unique $h: T \to T'$ with $h\circ\theta = \theta'$; composing with $i$, $(i\circ h)\circ\theta = i\circ\theta' = \theta$.
+
+But $\mathrm{id}_T$ also satisfies $\mathrm{id}_T\circ\theta = \theta$; by the uniqueness clause of the universal property, $i\circ h = \mathrm{id}_T$. Hence $i$ is surjective, and since $i$ is also injective (being an inclusion), $T' = T$.
+\end{proof}
+
+\begin{construction}{}{constr-tensor-product-existence}
+Let $(F,\iota)$ be the free $R$-module on the set $M\times N$. Let $H$ be the submodule of $F$ generated by all elements of the form
+\begin{enumerate}[label=(\alph*)]
+    \item $\iota(m_1+m_2,n) - \iota(m_1,n) - \iota(m_2,n)$,
+    \item $\iota(m,n_1+n_2) - \iota(m,n_1) - \iota(m,n_2)$,
+    \item $\iota(rm,n) - r\,\iota(m,n)$,
+\end{enumerate}
+for $m,m_1,m_2\in M$, $n,n_1,n_2\in N$, $r\in R$. Write $M\otimes_R N := F/H$, and let $\pi: F \to F/H$ be the natural projection.
+\end{construction}
+
+\begin{proof}[$\pi\circ\iota$ is bilinear]
+For instance,
+\[
+(\pi\circ\iota)(m_1+m_2,n) = \iota(m_1+m_2,n) + H = \bigl(\iota(m_1,n)+\iota(m_2,n)\bigr) + H = (\pi\circ\iota)(m_1,n) + (\pi\circ\iota)(m_2,n),
+\]
+using relation (a); the other bilinearity identities follow similarly from (b) and (c).
+\end{proof}
+
+Write $\otimes_R := \pi\circ\iota: M\times N \to M\otimes_R N$, so that $\otimes_R(m,n) =: m\otimes n$ are the \emph{simple tensors}.
+
+\begin{proof}[$(M\otimes_R N,\otimes_R)$ satisfies the universal property]
+Let $P$ be an $R$-module and $g: M\times N \to P$ bilinear. Since $F$ is free on $M\times N$, there is a unique morphism $j: F \to P$ such that $j\circ\iota = g$.
+
+\textbf{$H \subseteq \ker j$.} For instance,
+\[
+j\bigl(\iota(m_1+m_2,n) - \iota(m_1,n) - \iota(m_2,n)\bigr) = g(m_1+m_2,n) - g(m_1,n) - g(m_2,n) = 0,
+\]
+using bilinearity of $g$; similarly for the other generators of $H$.
+
+Hence $j$ induces a morphism $\bar k: M\otimes_R N \to P$ with $\bar k \circ \pi = j$, i.e.
+\[
+\bar k \circ \otimes_R = \bar k \circ (\pi\circ\iota) = (\bar k\circ\pi)\circ\iota = j\circ\iota = g.
+\]
+
+\textbf{Uniqueness.} Let $k: M\otimes_R N \to P$ be any morphism with $k\circ\otimes_R = g$, i.e.\ $k\circ\pi\circ\iota = g = \bar k\circ\pi\circ\iota$. By the uniqueness property of the free module $F$, $k\circ\pi = \bar k\circ\pi$; since $\pi$ is onto, $k = \bar k$.
+\end{proof}
