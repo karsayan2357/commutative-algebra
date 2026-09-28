@@ -1113,7 +1113,27 @@ becomes a monic equation in $bt$ with coefficients in $A$. Hence $bt$ is integra
 
 \section{Lecture 8}
 
-% Notes for this lecture to be added later.
+\begin{theorem}{Going Up}{thm:going-up}
+Let $A \hookrightarrow B$ be an integral extension. Let $\mathfrak p_1 \subseteq \mathfrak p_2 \subseteq \cdots \subseteq \mathfrak p_n$ be a chain in $\Spec A$, and let $Q_1 \subseteq \cdots \subseteq Q_m$ ($m < n$) be a chain in $\Spec B$ with $Q_i \cap A = \mathfrak p_i$ for all $i \in [m]$. Then the chain can be extended to a chain
+\[
+Q_1 \subseteq \cdots \subseteq Q_m \subseteq Q_{m+1} \subseteq \cdots \subseteq Q_n
+\]
+in $\Spec B$ with $Q_i \cap A = \mathfrak p_i$ for all $i \in [n]$.
+\end{theorem}
+
+\begin{proof}
+By induction on $n - m$, it suffices to treat the case $n = 2$, $m = 1$: given $\mathfrak p_1 \subseteq \mathfrak p_2$ in $\Spec A$ and $Q_1 \in \Spec B$ with $Q_1 \cap A = \mathfrak p_1$, we must find $Q_2 \in \Spec B$ with $Q_1 \subseteq Q_2$ and $Q_2 \cap A = \mathfrak p_2$.
+
+Let $\bar A = A/\mathfrak p_1$ and $\bar B = B/Q_1$. Since $Q_1 \cap A = \mathfrak p_1$, the induced map $\bar A \to \bar B$ is injective, and by Proposition~\ref{prop:prop:integral-quotient-and-localization}(1), $\bar A \hookrightarrow \bar B$ is an integral extension.
+
+Now $\mathfrak p_2/\mathfrak p_1 \in \Spec \bar A$. By Lying Over (Theorem~\ref{th:thm:lying-over}), there is $\bar Q \in \Spec \bar B$ with $\bar Q \cap \bar A = \mathfrak p_2/\mathfrak p_1$. By the correspondence theorem, $\bar Q = Q_2/Q_1$ for a unique $Q_2 \in \Spec B$ with $Q_1 \subseteq Q_2$.
+
+Finally, for $x \in A$,
+\[
+x \in Q_2 \iff \bar x \in \bar Q \cap \bar A = \mathfrak p_2/\mathfrak p_1 \iff x \in \mathfrak p_2,
+\]
+where the last step uses $\mathfrak p_1 \subseteq \mathfrak p_2$. Hence $Q_2 \cap A = \mathfrak p_2$.
+\end{proof}
 
 \section{Lecture 9}
 
@@ -1473,3 +1493,257 @@ Suppose $f(1/s\otimes m) = 0$, i.e.\ $m/s = 0$ in $S^{-1}M$. Then there is $t\in
 \]
 Hence $f$ is injective, so $S^{-1}R\otimes_R M \cong S^{-1}M$.
 \end{proof}
+
+\section{Lecture 11}
+
+\subsection*{Chain Conditions}
+
+\begin{proposition}{}{prop:acc-iff-maximal}
+Let $(\Sigma, \leq)$ be a poset. Then the following are equivalent:
+\begin{enumerate}[label=(\arabic*)]
+    \item Every ascending chain $x_1 \leq x_2 \leq \cdots$ in $\Sigma$ is stationary.
+    \item Every nonempty subset $T \subseteq \Sigma$ has a maximal element.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) $\Rightarrow$ (2): If $\emptyset \neq T \subseteq \Sigma$ had no maximal element, we could pick $x_1 \in T$ and inductively $x_{n+1} \in T$ with $x_n < x_{n+1}$, giving a strictly ascending chain which is not stationary.
+
+(2) $\Rightarrow$ (1): Given a chain $x_1 \leq x_2 \leq \cdots$, the set $\{x_n\}_{n \geq 1}$ has a maximal element $x_k$; then $x_n = x_k$ for all $n \geq k$.
+\end{proof}
+
+\begin{definition}{}{def:noetherian}
+An $R$-module $M$ is called \emph{noetherian} if every ascending chain of submodules of $M$ is stationary. A ring $R$ is \emph{noetherian} if $R$ is a noetherian $R$-module.
+\end{definition}
+
+\begin{theorem}{}{thm:noetherian-iff-submodules-fg}
+An $R$-module $M$ is noetherian if and only if every submodule of $M$ is finitely generated.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$) Let $M$ be noetherian and $N$ a submodule of $M$. Define
+\[
+\Sigma = \{\text{all finitely generated submodules of } N\}.
+\]
+Since $\{0\} \in \Sigma$, $\Sigma \neq \emptyset$. As $N$ is noetherian (a chain of submodules of $N$ is a chain in $M$), $\Sigma$ has a maximal element $N'$ by Proposition~\ref{prop:prop:acc-iff-maximal}. It is enough to show $N' = N$.
+
+If $N \neq N'$, there is $x \in N$ with $x \notin N'$. Then $N' + xR \supsetneq N'$, and $N' + xR$ is also finitely generated, contradicting the maximality of $N'$.
+
+($\Leftarrow$) Suppose every submodule of $M$ is finitely generated, and let $M_1 \subseteq M_2 \subseteq \cdots$ be an ascending chain of submodules of $M$. Then $N = \bigcup_{n \geq 1} M_n$ is a submodule, so by hypothesis it is finitely generated, say
+\[
+N = x_1R + x_2R + \cdots + x_nR,
+\]
+with each $x_j \in M_{i_j}$ for some $i_j$. Taking $k = \max_j i_j$, we have $x_1, \ldots, x_n \in M_k$, so $N \subseteq M_k$ and hence $M_k = N$. Therefore
+\[
+M_k = M_{k+1} = M_{k+2} = \cdots = N. \qedhere
+\]
+\end{proof}
+
+\begin{theorem}{}{thm:noetherian-exact-sequence}
+Let $0 \to M' \xrightarrow{\alpha} M \xrightarrow{\beta} M'' \to 0$ be an exact sequence of $R$-modules. Then $M$ is noetherian if and only if $M'$ and $M''$ are noetherian.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$) Let $M$ be noetherian, so $M$ satisfies the ascending chain condition on submodules.
+
+Let $N_1' \subseteq N_2' \subseteq \cdots$ be an ascending chain in $M'$. Then $\alpha(N_1') \subseteq \alpha(N_2') \subseteq \cdots$ is an ascending chain in $M$, hence stationary: there is $k$ with $\alpha(N_k') = \alpha(N_{k+i}')$ for all $i \geq 0$. As $\alpha$ is injective, $N_k' = N_{k+i}'$ for all $i \geq 0$. So $M'$ is noetherian.
+
+Next, $M'' \cong M/\Ker\beta$. Any ascending chain in $M''$ is of the form
+\[
+N_1/\Ker\beta \subseteq N_2/\Ker\beta \subseteq \cdots,
+\]
+where each $N_i$ is a submodule of $M$ containing $\Ker\beta$, and $N_1 \subseteq N_2 \subseteq \cdots$. The latter chain is stationary in $M$, so the chain $N_1/\Ker\beta \subseteq N_2/\Ker\beta \subseteq \cdots$ is also stationary.
+
+($\Leftarrow$) Conversely, let $M', M''$ be noetherian, and take an ascending chain $N_1 \subseteq N_2 \subseteq \cdots$ in $M$. Then
+\[
+\alpha^{-1}(N_1) \subseteq \alpha^{-1}(N_2) \subseteq \cdots \text{ in } M', \qquad \beta(N_1) \subseteq \beta(N_2) \subseteq \cdots \text{ in } M'',
+\]
+and both are stationary. Taking the bigger of the two indices, there is $n$ such that
+\[
+\alpha^{-1}(N_n) = \alpha^{-1}(N_{n+1}) = \cdots \quad\text{and}\quad \beta(N_n) = \beta(N_{n+1}) = \cdots.
+\]
+
+\textbf{Claim:} $N_n = N_{n+1} = \cdots$.
+
+It is enough to check $N_{n+1} \subseteq N_n$ (and likewise for later indices). Take $x \in N_{n+1}$. Then $\beta(x) \in \beta(N_{n+1}) = \beta(N_n)$, so there is $y \in N_n$ with $\beta(y) = \beta(x)$. Hence
+\[
+x - y \in \Ker\beta = \Im\alpha,
+\]
+so $x - y = \alpha(z)$ for some $z \in M'$. Since $x - y \in N_{n+1}$, we get $z \in \alpha^{-1}(N_{n+1}) = \alpha^{-1}(N_n)$, so $\alpha(z) \in N_n$, i.e.\ $x - y \in N_n$. Thus $x \in N_n$, and $N_{n+1} \subseteq N_n$.
+\end{proof}
+
+\begin{remark}{}{rem:direct-sum-noetherian}
+If $M_1, M_2$ are noetherian, then $M_1 \oplus M_2$ is noetherian (apply the theorem to $0 \to M_1 \to M_1 \oplus M_2 \to M_2 \to 0$), and inductively $M_1 \oplus M_2 \oplus \cdots \oplus M_n$ is noetherian.
+\end{remark}
+
+\begin{corollary}{}{cor:noetherian-ring-module-iff-fg}
+Let $R$ be a noetherian ring. An $R$-module $M$ is noetherian if and only if $M$ is finitely generated.
+\end{corollary}
+
+\begin{proof}
+($\Rightarrow$) Immediate from Theorem~\ref{th:thm:noetherian-iff-submodules-fg} ($M$ is a submodule of itself).
+
+($\Leftarrow$) Let $M$ be finitely generated. Then there is a surjective morphism $f: R^n \to M$. Since $R^n$ is noetherian (a direct sum of noetherian modules), and $M \cong R^n/\Ker f$, $M$ is noetherian by Theorem~\ref{th:thm:noetherian-exact-sequence}.
+\end{proof}
+
+\begin{proposition}{}{prop:quotient-noetherian}
+Let $R$ be noetherian and $I \subseteq R$ an ideal. Then $R/I$ is a noetherian ring.
+\end{proposition}
+
+\begin{proof}
+The sequence $0 \to I \to R \to R/I \to 0$ is exact. Since $R$ is noetherian, $I$ and $R/I$ are noetherian $R$-modules. The $R/I$-submodules of $R/I$ are exactly its $R$-submodules, so $R/I$ is a noetherian $R/I$-module, i.e.\ a noetherian ring.
+\end{proof}
+
+\begin{corollary}{}{cor:fg-module-over-noetherian-is-noetherian-ring}
+Let $A \hookrightarrow B$ be rings. Assume $A$ is noetherian and $B$ is a finitely generated $A$-module. Then $B$ is a noetherian ring.
+\end{corollary}
+
+\begin{proof}
+$B$ is a finitely generated $A$-module and $A$ is noetherian, so $B$ is a noetherian $A$-module. Let $I \subseteq B$ be an ideal. Note that $I$ is an $A$-submodule of $B$, so $I$ is a finitely generated $A$-module, hence also a finitely generated $B$-module (the same generators work).
+\end{proof}
+
+\begin{theorem}{Hilbert Basis Theorem}{thm:hilbert-basis}
+If $R$ is noetherian, then $R[X]$ is also noetherian.
+\end{theorem}
+
+\begin{proof}
+Let $I \subseteq R[X]$ be an ideal; we show that $I$ is finitely generated. Consider
+\[
+\ell(I) := \{\text{leading coefficients of elements of } I\} \cup \{0\}.
+\]
+Then $\ell(I) \subseteq R$ is an ideal. Since $R$ is noetherian, $\ell(I)$ is finitely generated, say $\ell(I) = \ideal{a_1, \ldots, a_n}$. Let $f_i \in I$ be such that the leading coefficient of $f_i$ is $a_i$, and let
+\[
+I' = \ideal{f_1, \ldots, f_n} \subseteq I.
+\]
+Take $r := \max_i \{\deg f_i\}$, and let $M$ be the $R$-module generated by $\{1, X, X^2, \ldots, X^{r-1}\}$.
+
+\textbf{Claim:} $I = (I \cap M) + I'$.
+
+It is enough to show $I \subseteq (I \cap M) + I'$. Take $f(X) \in I$, $f(X) = aX^m + (\text{lower degree terms})$. If $m < r$, then $f(X) \in I \cap M$. Let $m \geq r$. Then $a \in \ell(I) = \ideal{a_1, \ldots, a_n}$, so
+\[
+a = u_1a_1 + \cdots + u_na_n, \qquad u_i \in R.
+\]
+Consider
+\[
+f(X) - \sum_i u_if_i X^{m - r_i}, \qquad r_i = \deg f_i.
+\]
+This lies in $I$ and reduces the degree of $f$. Continuing this way, we find $g \in I'$ such that $f - g$ is a polynomial of degree $\leq r - 1$. Then
+\[
+f - g \in I \cap M \quad\text{and}\quad g \in I',
+\]
+so $f \in (I \cap M) + I'$, proving the claim.
+
+Now $M$ is a finitely generated $R$-module and $R$ is noetherian, so $M$ is a noetherian $R$-module (Corollary~\ref{cor:cor:noetherian-ring-module-iff-fg}). Thus its submodule $I \cap M$ is finitely generated, and $I'$ is finitely generated. Hence $I = (I \cap M) + I'$ is finitely generated.
+\end{proof}
+
+\begin{corollary}{}{cor:poly-ring-noetherian}
+If $R$ is noetherian, then $R[X_1, \ldots, X_n]$ is noetherian.
+\end{corollary}
+
+\begin{corollary}{}{cor:fg-algebra-noetherian}
+If $R$ is noetherian, then $R[X_1, \ldots, X_n]/I$ is noetherian for every ideal $I$. (Such rings are called \emph{finitely generated $R$-algebras}.)
+\end{corollary}
+
+\begin{corollary}{}{cor:fg-k-algebra-noetherian}
+If $k$ is a field, then $k[X_1, \ldots, X_n]/I$ is noetherian.
+\end{corollary}
+
+\begin{theorem}{}{thm:cohen-noetherian}
+A ring $R$ is noetherian if and only if every prime ideal of $R$ is finitely generated.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$) is clear. For ($\Leftarrow$), let
+\[
+\Sigma := \{K \subseteq R \text{ ideal} \mid K \text{ is not finitely generated}\},
+\]
+and assume $\Sigma \neq \emptyset$. The union of a chain in $\Sigma$ is an ideal, and it is not finitely generated (otherwise its finitely many generators would lie in a single member of the chain, making that member finitely generated). So by Zorn's Lemma, $\Sigma$ has a maximal element, say $I$.
+
+Note that $I$ is not finitely generated (in particular $I \neq R$) and, by hypothesis, not prime. Hence there exist $x \notin I$, $y \notin I$ with $xy \in I$.
+
+Take $I + \ideal{x} \supsetneq I$. Then $I + \ideal{x} \notin \Sigma$, so $I + \ideal{x}$ is finitely generated. Also consider
+\[
+(I : x) = \{a \in R \mid ax \in I\},
+\]
+which is an ideal. Since $y \in (I:x) \setminus I$, we have $I \subsetneq (I : x)$, so $(I:x)$ is finitely generated.
+
+Now write $I + \ideal{x} = R\alpha_1 + \cdots + R\alpha_n + Rx$ with $\alpha_i \in I$ (each generator of $I + \ideal{x}$ has the form $\alpha + rx$ with $\alpha \in I$, and we may replace it by $\alpha$). Define
+\[
+J := \ideal{\alpha_1, \ldots, \alpha_n}, \qquad \text{so that } J + \ideal{x} = I + \ideal{x}.
+\]
+
+\textbf{Claim:} $I = J + x(I : x)$.
+
+Clearly $J \subseteq I$ and $x(I:x) \subseteq I$. Conversely, let $a \in I$. Then $a \in J + \ideal{x}$, so $a = j + rx$ with $j \in J$, $r \in R$. Now $rx = a - j \in I$, so $r \in (I : x)$, and $a \in J + x(I:x)$.
+
+Since $J$ and $(I:x)$ are finitely generated, so is $I = J + x(I:x)$. This contradicts $I \in \Sigma$. Hence $\Sigma = \emptyset$, and every ideal of $R$ is finitely generated.
+\end{proof}
+
+\section{Lecture 12}
+
+\begin{proposition}{}{prop:fg-algebra-intermediate}
+Let $A \subseteq B \subseteq C$ be rings. Assume
+\begin{enumerate}[label=(\arabic*)]
+    \item $A$ is noetherian;
+    \item $C$ is a finitely generated $A$-algebra;
+    \item $C$ is a finitely generated $B$-module.
+\end{enumerate}
+Then $B$ is a finitely generated $A$-algebra.
+\end{proposition}
+
+\begin{proof}
+Say $C = A[\alpha_1, \ldots, \alpha_m]$ with $\alpha_i \in C$, and let $\beta_1, \ldots, \beta_n$ generate $C$ as a $B$-module, so $C = B\beta_1 + \cdots + B\beta_n$. Then
+\begin{align}
+\alpha_i &= \sum_j b_{ij}\beta_j, && b_{ij} \in B, \label{eq:alpha-in-beta}\\
+\beta_i\beta_j &= \sum_k b_{ijk}\beta_k, && b_{ijk} \in B. \label{eq:beta-products}
+\end{align}
+
+Let $B_0$ be the $A$-algebra generated by the $b_{ij}$ and the $b_{ijk}$. Then $B_0$ is a finitely generated $A$-algebra and $A$ is noetherian, so $B_0$ is noetherian (Hilbert basis theorem), and
+\[
+A \subseteq B_0 \subseteq B.
+\]
+
+An element of $C$ is a polynomial expression in $\alpha_1, \ldots, \alpha_m$ with coefficients in $A$. Substituting \eqref{eq:alpha-in-beta} and then repeatedly applying \eqref{eq:beta-products} to reduce products of the $\beta$'s, we get that
+\[
+C = B_0 + B_0\beta_1 + \cdots + B_0\beta_n,
+\]
+so $C$ is a finitely generated $B_0$-module. Since $B_0$ is noetherian, $C$ is a noetherian $B_0$-module. As $B$ is a $B_0$-submodule of $C$, it follows that $B$ is a finitely generated $B_0$-module.
+
+Combining: $B_0$ is a finitely generated $A$-algebra and $B$ is a finitely generated $B_0$-module, so $B$ is a finitely generated $A$-algebra (generated by the algebra generators of $B_0$ together with the module generators of $B$ over $B_0$).
+\end{proof}
+
+\begin{theorem}{Artin--Tate: weak form of Hilbert's Nullstellensatz}{thm:artin-tate-weak-nullstellensatz}
+Let $k$ be a field and $E$ a finitely generated $k$-algebra. If $E$ is a field, then $E$ is a finite algebraic extension of $k$.
+\end{theorem}
+
+\begin{corollary}{}{cor:residue-field-fg-algebra}
+Let $k$ be a field, $A$ a finitely generated $k$-algebra, and $\mathfrak m \in \Max(A)$. Then $A/\mathfrak m$ is a finite algebraic extension of $k$. In particular, if $k$ is algebraically closed, then $A/\mathfrak m \cong k$.
+\end{corollary}
+
+\begin{proof}
+$A/\mathfrak m$ is a field and a finitely generated $k$-algebra, so the theorem applies. If $k$ is algebraically closed, its only finite algebraic extension is $k$ itself.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{th:thm:artin-tate-weak-nullstellensatz}]
+Let $E = k[\alpha_1, \ldots, \alpha_m]$. Suppose $E$ is \emph{not} algebraic over $k$. Then we can rename the $\alpha_i$ so that $\alpha_1, \ldots, \alpha_r$ ($r \geq 1$) are algebraically independent over $k$, i.e.\ there is no nonzero polynomial $f \in k[X_1, \ldots, X_r]$ with $f(\alpha_1, \ldots, \alpha_r) = 0$, and each of $\alpha_{r+1}, \ldots, \alpha_m$ is algebraic over
+\[
+F = k(\alpha_1, \ldots, \alpha_r).
+\]
+
+Then $E = F[\alpha_{r+1}, \ldots, \alpha_m]$ is a finite extension of $F$, so $E$ is a finitely generated $F$-module. Apply Proposition~\ref{prop:prop:fg-algebra-intermediate} to
+\[
+k \subseteq F \subseteq E
+\]
+($k$ is noetherian, $E$ is a finitely generated $k$-algebra, $E$ is a finitely generated $F$-module): $F$ is a finitely generated $k$-algebra, say $F = k[\beta_1, \ldots, \beta_s]$, where
+\[
+\beta_i = \frac{f_i}{g_i}, \qquad f_i, g_i \in k[\alpha_1, \ldots, \alpha_r],\ g_i \neq 0.
+\]
+
+Now $k[\alpha_1, \ldots, \alpha_r] \cong k[X_1, \ldots, X_r]$ is a UFD with infinitely many (non-associate) irreducibles, so there is an irreducible $h$ that is coprime to each $g_i$: take $h$ to be an irreducible factor of $g_1 \cdots g_s + 1$. Then $h \in k[\alpha_1, \ldots, \alpha_r]$ and $h^{-1} \in k(\alpha_1, \ldots, \alpha_r) = F$.
+
+But $h^{-1}$ cannot be written as a polynomial in the $\beta_i$'s: a polynomial in the $f_i/g_i$ has the form $p/(g_1\cdots g_s)^N$ with $p \in k[\alpha_1, \ldots, \alpha_r]$, and $h^{-1} = p/(g_1\cdots g_s)^N$ would give $(g_1 \cdots g_s)^N = hp$, so the irreducible (hence prime) $h$ would divide some $g_i$. Contradiction. Hence $E$ is algebraic over $k$, and being finitely generated by algebraic elements, $E$ is a finite extension of $k$.
+\end{proof}
+
+\begin{remark}{}{rem:artin-tate-constant-denominators}
+The choice of $h$ needs $g_1\cdots g_s + 1$ to be nonconstant. If every $g_i$ were a constant, then $F = k[\beta_1,\ldots,\beta_s] \subseteq k[\alpha_1, \ldots, \alpha_r]$, a polynomial ring in $r \geq 1$ variables, which is not a field (e.g.\ $\alpha_1$ is not invertible). So we may assume some $g_i$ is nonconstant, and then $g_1\cdots g_s + 1$ is nonconstant.
+\end{remark}
